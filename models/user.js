@@ -1,51 +1,50 @@
 /************************************/
 /*** Import des modules nécessaires */
-const { DataTypes } = require('sequelize')
-const bcrypt = require('bcrypt')
+const bcrypt = require( 'bcrypt' )
 
 /*******************************/
 /*** Définition du modèle User */
-module.exports = (sequelize) => {
-    const User = sequelize.define('User', {
+module.exports = ( sequelize ) => {
+    const User = sequelize.define( 'Users', {
         id: {
-            type: DataTypes.INTEGER(10),
+            type: DataTypes.INTEGER( 10 ),
             primaryKey: true,
             autoIncrement: true
         },
-        nom:{
-            type: DataTypes.STRING(100),
+        nom: {
+            type: DataTypes.STRING( 100 ),
             defaultValue: '',
             allowNull: false
         },
-        prenom:{
-            type: DataTypes.STRING(100),
+        prenom: {
+            type: DataTypes.STRING( 100 ),
             defaultValue: '',
             allowNull: false
         },
-        pseudo:{
-            type: DataTypes.STRING(100),
+        pseudo: {
+            type: DataTypes.STRING( 100 ),
             allowNull: false,
             unique: true
         },
-        email:{
+        email: {
             type: DataTypes.STRING,
-            validate:{
+            validate: {
                 isEmail: true        // Ici une validation de données
             }
         },
-        password:{
-            type: DataTypes.STRING(64),
+        password: {
+            type: DataTypes.STRING( 64 ),
             is: /^[0-9a-f]{64}$/i    // Ici une contrainte
         }
-    }, { paranoid: true })           // Ici pour faire du softDelete
-    
-    User.beforeCreate( async (user, options) => {
-        let hash = await bcrypt.hash(user.password, parseInt(process.env.BCRYPT_SALT_ROUND))
+    }, { paranoid: true } )           // Ici pour faire du softDelete
+
+    User.beforeCreate( async ( user, options ) => {
+        let hash = await bcrypt.hash( user.password, parseInt( process.env.BCRYPT_SALT_ROUND ) )
         user.password = hash
-    })
-    
-    User.checkPassword = async (password, originel) => {
-        return await bcrypt.compare(password, originel)
+    } )
+
+    User.checkPassword = async ( password, originel ) => {
+        return await bcrypt.compare( password, originel )
     }
 
     return User
