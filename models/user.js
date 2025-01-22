@@ -1,5 +1,6 @@
 /************************************/
 /*** Import des modules nécessaires */
+const { DataTypes } = require( 'sequelize' )
 const bcrypt = require( 'bcrypt' )
 
 /*******************************/
