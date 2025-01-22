@@ -12,9 +12,9 @@ jobs:
   Backend:
     if: ${{ github.event_name == 'pull_request' && !contains(github.event.pull_request.head.ref, '#cesi') }}
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: backend
+    # defaults:
+    #   run:
+    #     working-directory: backend
 
     services:
       mariadb:
