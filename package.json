@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "initbdd": "node -r dotenv/config ./api/config/init_bdd",
-    "populate": "node -r dotenv/config ./api/config/first_start",
+    "initbdd": "node -r dotenv/config ./api/init_bdd",
+    "populate": "node -r dotenv/config ./api/first_start",
     "start": "node -r dotenv/config server.js",
     "dev": "nodemon -r dotenv/config server.js"
   },
