@@ -24,7 +24,7 @@ app.use(express.urlencoded({ extended: true }))
 /***********************************/
 /*** Import des modules de routage */
 const user_router = require('./routes/users')
-const cocktail_router = require('./routes/cocktails')
+
 
 const auth_router = require('./routes/auth')
 
@@ -34,7 +34,7 @@ const auth_router = require('./routes/auth')
 app.get('/', (req, res) => res.send(`I'm online. All is OK !`))
 
 app.use('/users', checkTokenMiddleware, user_router)
-app.use('/cocktails', cocktail_router)
+
 
 app.use('/auth', auth_router)
 

@@ -1,6 +1,6 @@
 <div align="center">
 
-# Cocktail - Back End ExpressJS 4
+# Back End ExpressJS 4
 </div>
 
 <p align="center">
@@ -19,12 +19,12 @@
 </p>
 
 # A propos
-Ce projet est le back de l'applicatif Cocktail. Il s'agit d'un exercice de réalisation de projet.
+Ce projet est le back.
 
 
 ## Fonctionnalitées
 - Gestion des utilisateur compte et connection. 
-- Gestion des cocktails en CRUD
+
 - Session utilisatuer gérée avec le JsonWebToken
 
 
