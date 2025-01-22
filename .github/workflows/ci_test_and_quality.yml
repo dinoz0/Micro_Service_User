@@ -2,10 +2,10 @@ name: Integration
 
 on:
   push:
-    branches: 
+    branches:
       - main
   pull_request:
-    branches: 
+    branches:
       - main
 
 jobs:
@@ -24,7 +24,7 @@ jobs:
           MARIADB_DATABASE: test
           MARIADB_USER: test
           MARIADB_PASSWORD: test
-        ports: 
+        ports:
           - 3306:3306
         options: --heatlh-cmd="heatlhcheck.sh --connect --innodb_initialized" --heatlh-interval=10s --heatlh-timeout=5s --heatlh-retries=3
     env:
@@ -52,15 +52,44 @@ jobs:
       #   run: npm run initbdd
 
       - name: Populate BDD
-        run: 
-          mysql -u root ptoor --host --host 127.0.0.1 --port 3306 --database test < ./tests/insert_test_user.sql
+        run: mysql -u root ptoor --host --host 127.0.0.1 --port 3306 --database test < ./tests/insert_test_user.sql
 
       - name: Run all Test And Coverage
         run: npm run test:conv
 
       - name: Upload Coverage Artifacts
         uses: action/upload-artifact@v4
-        with: 
+        with:
           name: coverage-repport
           path: backend/coverage
           retention-days: 3
+
+  # Frontend:
+  #   needs: [Backend]
+  #   runs-on: ubuntu-latest
+  #   defaults:
+  #     run:
+  #       working-directory: frontend
+
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v3
+  #     - name: Start Builded Backend
+  #       working-directory: backend
+  #       run: |
+  #         docker compose -f docker-compose-build.yml up -d
+  #         docker ps -a
+
+  #     - name: Sleep for 10 seconds
+  #       uses: jakejarvis/wait-action@master
+  #       with:
+  #         time: '10s'
+
+  #       - name: Test Backend Container
+  #         if: success()
+  #         run: curl http://127.0.0.1:23000
+
+  #       - name: Setup node
+  #         uses: actions/setup-node@v3
+  #         with:
+  #           node-version: 20.x
