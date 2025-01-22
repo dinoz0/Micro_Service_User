@@ -33,6 +33,10 @@ jobs:
       DB_NAME: test
       DB_USER: test
       DB_PASS: test
+      FIRST_ADMIN_PASSWORD: nimda
+      BCRYPT_SALT_ROUND: 10
+      JWT_SECRET: phrasesecrete
+      JWT_DURING: 1 hour
 
     steps:
       - name: Checkout Code
